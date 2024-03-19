@@ -9,23 +9,28 @@
 </head>
 <body>
 <div class="container">
-    <div class="blur"></div>
-        <div class="card">
-            <img src="../src/assets/Kasyno.jpg" class="logo" alt="logo casino">
-            <h1>Se connecter à Kasyno !</h1>
 
-            <form method="post">
-                <input type="email" name="email" placeholder="Votre email"/>
-                <input type="password" name="password" placeholder="Votre mot de passe"/>
-                <input class="submitButton" type="submit" name="formLogin" value="Se connecter"/>
-            </form>
-          <p>Mot de passe oublié? Cliquez</p>
-            <a>ici</a>
-        </div>
-    <?php include "../model/LoginController.php"; ?>
-    <div class="blur"></div>
-    
-    
+    <div class="card">
+        <img src="../src/assets/Kasyno.jpg" class="logo" alt="logo casino">
+        <h1>Se connecter à Kasyno !</h1>
+        <form action="../controller/LoginController.php" method="post">
+            <div class="alignLabel">
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="alignLabel">
+                <label for="password">Mot de passe :</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <input type="submit" class="submitButton"name="formLogin" value="Se connecter">
+        </form>
+      <p>Pas encore de compte ? </p>
+        <a href="Signin.php">S'inscrire</a>
+    </div>
+
+
+
 </div>
 
 </body>
