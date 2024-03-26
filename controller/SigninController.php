@@ -25,13 +25,13 @@ if (isset($_POST["formSignin"])) {
             header("Location: ../views/login.php");
             exit();
         } else {
-            // Rediriger vers la page de création de compte avec un message d'erreur
-            header("Location: ../views/Signin.php?error=user_exists");
+            $_SESSION['error'] = 'Un utilisateur existe déjà avec cet username.';
+            header("Location: ../views/Signin.php");
             exit();
         }
     } else {
-        // Rediriger vers la page de création de compte avec un message d'erreur
-        header("Location: ../views/Signin.php?error=weak_password");
+        $_SESSION['error'] = 'Le mot de pas n\'est pas assez robuste.';
+        header("Location: ../views/Signin.php");
         exit();
     }
 }

@@ -11,7 +11,7 @@ if (!isset($_SESSION['username'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="fr" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <script src="../src/js/common.js"></script>
@@ -27,7 +27,7 @@ if (!isset($_SESSION['username'])) {
       <span class="material-symbols-outlined">settings</span>
     </button>
 
-    <button onclick="redirectTo('Account')">
+    <button onclick="redirectTo('Friendship')">
 
         <span class="material-symbols-outlined">group</span>
 
@@ -44,16 +44,20 @@ if (!isset($_SESSION['username'])) {
         <span class="material-symbols-outlined">account_balance</span>
 
     </button>
-    <button onclick="logout()">Se déconnecter</button>
-</div>
-          <div class="jeux">
-              <button id="blackjack" onclick="redirectTo('Blackjack')">
-                    <span id="blackjackHide">Blackjack</span>
-                </button>
-              <button id="Texas" onclick="redirectTo('Texas')"><span id="TexasHide">Texas Hold'em</span>
+    <button onclick="redirectTo('Account')">
 
-              </button>
-          </div>
+        <span class="material-symbols-outlined">logout</span>
+
+    </button>
+</div>
+<div class="jeux">
+  <button id="blackjack" onclick="redirectTo('Blackjack')">
+        <span id="blackjackHide">Blackjack</span>
+    </button>
+  <button id="Texas" onclick="redirectTo('Texas')"><span id="TexasHide">Texas Hold'em</span>
+
+  </button>
+</div>
 
 
 

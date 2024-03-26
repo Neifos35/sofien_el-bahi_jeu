@@ -19,13 +19,16 @@ if (isset($_POST['formLogin'])) {
         $_SESSION['nom'] = $user['nom'];
         $_SESSION['prenom'] = $user['prenom'];
         $_SESSION['mail'] = $user['email'];
-        $_SESSION['password'] = $user['password'];
         $_SESSION['soldeFictif'] = $user['soldeFictif'];
+
 
         // Redirige vers la page d'accueil après la connexion réussie
         header("Location: ../views/home.php");
         exit();
     } else {
-        echo "Mot de passe incorrect ou compte inexistant.";
+        $_SESSION['error'] = 'Identifiants incorrects. Veuillez réessayer.';
+        header("Location: ../views/Login.php");
+        exit();
+
     }
 }

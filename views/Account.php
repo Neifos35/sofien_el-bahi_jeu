@@ -44,14 +44,30 @@ if (isset($_GET['error'])) {
 </head>
 <body>
 <div class="navbar">
-    <button onclick="redirectTo('Home')"><span class="material-symbols-outlined">home</span></button>
+    <button onclick="redirectTo('Account')">
+        <span class="material-symbols-outlined">settings</span>
+    </button>
+
+    <button onclick="redirectTo('Friendship')">
+        <span class="material-symbols-outlined">group</span>
+    </button>
+
     <div class="userNav">
         <h3><?= $_SESSION['username']?></h3>
         <div class="soldes">
             <span class="solde">Argent Fictif : <?= $_SESSION['soldeFictif']?></span>
         </div>
     </div>
-    <button onclick="logout()">Se déconnecter</button>
+    <button onclick="redirectTo('Account')">
+
+        <span class="material-symbols-outlined">account_balance</span>
+
+    </button>
+    <button onclick="redirectTo('Account')">
+
+        <span class="material-symbols-outlined">logout</span>
+
+    </button>
 </div>
 
 <div class="container">
@@ -77,7 +93,7 @@ if (isset($_GET['error'])) {
             <input type="password" id="confirm_password" name="confirm_password" >
 
 
-            <input type="submit" value="Mettre à jour">
+            <input type="submit" class="submitButton" value="Mettre à jour">
         </form>
         </div>
     </div>

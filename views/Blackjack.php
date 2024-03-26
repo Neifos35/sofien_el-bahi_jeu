@@ -24,12 +24,12 @@ session_start();
 
             <div id="dealer-hand">
                 <div id="cards">
-                    <!-- Cards will be dynamically added here -->
+
                 </div>
             </div>
-            <div id="player-hand"> <!-- Il manque cette balise div fermante -->
+            <div id="player-hand">
                 <div id="cards">
-                    <!-- Cards will be dynamically added here -->
+
                 </div>
             </div>
             <span id="player-score-value"></span>

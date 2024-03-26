@@ -8,6 +8,13 @@
     <title>Kasyno</title>
 </head>
 <body>
+<?php
+    session_start();
+    if (isset($_SESSION['error'])) {
+        echo '<div class="error">' . $_SESSION['error'] . '</div>';
+        unset($_SESSION['error']); // Efface le message d'erreur après l'avoir affiché
+    }
+    ?>
 <div class="container">
 
     <div class="card">

@@ -9,18 +9,15 @@
 </head>
 <body>
 <?php
-if (isset($_GET['error'])) {
-    $error = $_GET['error'];
-    if ($error === "user_exists") {
-        echo "<p>Un utilisateur existe déjà avec cet email ou ce nom d'utilisateur.</p>";
-    } elseif ($error === "weak_password") {
-        echo "<p>Le mot de passe n'est pas assez robuste. Il doit faire au moins 12 caractères et contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial.</p>";
-    }
+session_start();
+if (isset($_SESSION['error'])) {
+echo '<div class="error">' . $_SESSION['error'] . '</div>';
+unset($_SESSION['error']); // Efface le message d'erreur après l'avoir affiché
 }
 ?>
-<div class="container">
+<div class="containerSignin">
 
-        <div class="card">
+        <div class="cardSignin">
             <img src="../src/assets/Kasyno.jpg" class="logo" alt="logo casino">
             <h1>S'inscrire à Kasyno !</h1>
 
@@ -41,9 +38,11 @@ if (isset($_GET['error'])) {
                     <label for="email">Email :</label>
                     <input type="email" id="email" name="email" required>
                 </div>
+                <span>Au moins : 12 caractères, 1 majuscule, 1 minuscule, 1 caractère spéciale</span>
                 <div class="alignLabel">
                     <label for="password">Mot de passe :</label>
                     <input type="password" id="password" name="password" required>
+
                 </div>
                 <div class="alignLabel">
                     <label for="passwordConfirm">Confirmer le mot de passe :</label>
