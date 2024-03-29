@@ -43,3 +43,42 @@ if(isset($_POST['addButton'])) {
         exit();
     }
 }
+if(isset($_POST['acceptButton'])) {
+    $username1 = $_SESSION['username'];
+    $username2 = $_SESSION['friendUsername'];
+
+    require_once "../model/FriendshipModel.php";
+
+    $result = FriendshipModel::acceptFriend($username1, $username2);
+
+    if ($result) {
+        $_SESSION['success'] = 'Demande d\'amitié acceptée';
+        header("Location: ../views/Friendship.php");
+        exit();
+    } else {
+        $_SESSION['error'] = 'Erreur lors de l\'acceptation de la demande d\'amitié';
+        header("Location: ../views/Friendship.php");
+        exit();
+    }
+}
+if(isset($_POST['rejectButton'])) {
+    $username1 = $_SESSION['username'];
+    $username2 = $_SESSION['friendUsername'];
+
+    require_once "../model/FriendshipModel.php";
+
+    $result = FriendshipModel::rejectFriend($username1, $username2);
+
+    if ($result) {
+        $_SESSION['success'] = 'Demande d\'amitié rejetée';
+        header("Location: ../views/Friendship.php");
+        exit();
+    } else {
+        $_SESSION['error'] = 'Erreur lors du rejet de la demande d\'amitié';
+        header("Location: ../views/Friendship.php");
+        exit();
+    }
+
+}
+
+

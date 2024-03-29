@@ -33,7 +33,12 @@ a:-webkit-any-link {
     color: var(--text-color);
     cursor: pointer;
 }
+.h3{
 
+    margin: 0;
+    padding: 0;
+
+}
 .solde {
     margin: 0 5px;
 }
@@ -151,7 +156,7 @@ a {
     margin: 0;
 }
 
-input.submitButton {
+button.submitButton, input.submitButton{
     background-color: var(--button-color);
     color: var(--text-color);
     padding: 15px 25px;
@@ -162,7 +167,7 @@ input.submitButton {
     transition: background-color 0.3s ease;
 }
 
-input.submitButton:hover {
+input.submitButton:hover, button.submitButton:hover {
     background-color: var(--button-hover-color);
 }
 
@@ -172,30 +177,54 @@ form {
     align-items: center;
 
 }
+.alignFriendship{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
 
-#blackjackHide,
-#TexasHide {
-    display: none;
 }
-
-#blackjack,
-#Texas {
-    color: transparent;
+.gameButton {
     background: transparent;
     border: none;
     cursor: pointer;
-    position: absolute;
-    left: 80vh;
+    position: relative;
+    width: 200px;
+    height: 60px;
+    margin: 30px 0; /* Spacing between buttons */
 }
 
-#blackjack:hover + #blackjackHide,
-#Texas:hover + #TexasHide {
-    display: block;
-    color: #FFFFFF;
-    background-color: #777777;
+.gameName {
+    display: none; /* Cacher le nom du jeu par défaut */
     position: absolute;
-    left: 90vh;
+    top: 100%; /* Positionner le nom du jeu en dessous du bouton */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #777777;
+    color: #FFFFFF;
+    padding: 5px;
+    border-radius: 5px;
 }
+
+.gameButton:hover .gameName {
+    display: block; /* Afficher le nom du jeu au survol */
+}
+
+.jeux {
+    display: flex;
+    flex-direction: column; /* Align children vertically */
+    justify-content: center;
+    align-items: center;
+    position: absolute; /* Position the container absolutely */
+    top: 70%; /* Adjust this value to match the poker table's position */
+    left: 50%; /* Adjust this value to match the poker table's position */
+    transform: translate(-50%, -50%); /* Center the container */
+    margin-top: 0;
+    height: auto; /* Height is set to auto to contain the buttons */
+}
+
+
+
 
 .error {
     display: flex;
@@ -208,4 +237,52 @@ form {
     border-radius: 8px;
     color: red;
     z-index: 1000000;
+}
+.acceptButton {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 25px;
+    margin: 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.rejectButton {
+    background-color: #f44336;
+    color: white;
+    padding: 15px 25px;
+    margin: 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#Blackjack , #Texas , #Roulette {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--background-color);
+    border: 1px solid black;
+    padding: 20px;
+    z-index: 1000;
+    width: 80vw;
+    height: 60vh;
+    overflow: auto;
+    border-radius: 10px;
+}
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Couleur d'arrière-plan semi-transparente */
+    backdrop-filter: blur(5px); /* Applique un flou */
+    z-index: 999; /* Assurez-vous que l'overlay est au-dessus de tout le reste */
 }

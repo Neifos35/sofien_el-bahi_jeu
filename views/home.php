@@ -34,30 +34,37 @@ if (!isset($_SESSION['username'])) {
     </button>
 
     <div class="userNav">
+
+        <button onclick="redirectTo('Home')">
+
+            <span class="material-symbols-outlined">home</span>
+
+        </button>
         <h3><?= $_SESSION['username']?></h3>
         <div class="soldes">
             <span class="solde">Argent Fictif : <?= $_SESSION['soldeFictif']?></span>
         </div>
     </div>
-    <button onclick="redirectTo('Account')">
+    <button onclick="redirectTo('Games')">
 
         <span class="material-symbols-outlined">account_balance</span>
 
     </button>
-    <button onclick="redirectTo('Account')">
+    <button onclick="redirectTo('Logout')">
 
         <span class="material-symbols-outlined">logout</span>
 
     </button>
 </div>
 <div class="jeux">
-  <button id="blackjack" onclick="redirectTo('Blackjack')">
-        <span id="blackjackHide">Blackjack</span>
+    <button id="blackjackButton" class="gameButton" onclick="redirectTo('Blackjack')">
+        <span class="gameName">Blackjack</span>
     </button>
-  <button id="Texas" onclick="redirectTo('Texas')"><span id="TexasHide">Texas Hold'em</span>
-
-  </button>
+    <button id="texasButton" class="gameButton" onclick="redirectTo('Texas')">
+        <span class="gameName">Texas Hold'em</span>
+    </button>
 </div>
+
 
 
 
