@@ -1,8 +1,21 @@
+<?php
+
+session_start();
+
+
+if (!isset($_GET['game_id'])) {
+    die('Aucun jeu spécifié.');
+}
+
+$gameId = $_GET['game_id'];
+
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <script src="../src/js/texas.js"></script>
+    <script src="../src/js/checkGameStatus.js"></script>
     <link rel="stylesheet" href="../src/style/texas.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,17 +24,12 @@
     <title>Kasyno</title>
 </head>
 <body>
-<?php
-session_start();
-
-?>
-<h1>Blackjack</h1>
 <div class="TableExt">
     <div class="TableInt">
         <div class="TableDecoration">
             <span id="dealer-score-value"></span>
 
-
+            <span id="status">Vérification de l'état du jeu...</span>
             <div id="dealer-hand">
                 <div id="cards">
 
@@ -36,11 +44,9 @@ session_start();
         </div>
     </div>
 </div>
-<div class="btnAction">
-    <span id="status"></span>
-    <button id="hit-btn"> Tirer une carte</button>
+<div class="btnAction" id="actionButtons">
+    <button id="hit-btn">Tirer une carte</button>
     <button id="stand-btn">Rester</button>
-    <button id="reset-btn">Nouvelle partie</button>
 </div>
 
 

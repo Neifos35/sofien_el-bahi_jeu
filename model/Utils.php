@@ -16,4 +16,24 @@ class Utils {
 
         return true;
     }
+
+    public static function getPasswordHash($id) {
+        // Inclure la configuration de connexion à la base de données
+        require_once "../src/lib/Connexion.php";
+
+        // Connexion à la base de données
+        $connexion = Connexion::connect();
+        if ($connexion === null) {
+            return false; // Gérer l'erreur de connexion
+        }
+
+        // Récupérer le hash du mot de passe actuel de l'utilisateur
+        $sql = "SELECT password FROM user WHERE id = ?";
+        $stmt = $connexion->prepare($sql);
+        $stmt->execute([$id]);
+        $password_hash = $stmt->fetchColumn();
+
+        return $password_hash;
+    }
+
 }

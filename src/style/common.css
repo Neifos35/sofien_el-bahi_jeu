@@ -75,9 +75,9 @@ button {
 
 .containerSignin {
     display: flex;
-    justify-content: center; /* Centrer horizontalement les éléments */
-    align-items: center; /* Centrer verticalement les éléments */
-    height: 100vh; /* Utiliser toute la hauteur de l'écran */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 .card {
     color: var(--text-color);
@@ -105,38 +105,30 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 600px; /* Largeur fixe pour la carte */
-    padding: 20px; /* Ajouter un espace intérieur */
+    width: 600px;
     margin-bottom: 10px;
 }
 
-
-
-
-
 .alignLabel {
     display: flex;
-    justify-content: center; /* Centrer horizontalement les éléments */
-    align-items: center; /* Centrer verticalement les éléments */
+    justify-content: center;
+    align-items: center;
     margin-bottom: 10px;
 }
 
 .alignLabel label {
-    width: 100px; /* Largeur fixe pour les étiquettes */
-    text-align: left; /* Alignement du texte à gauche */
-    margin-right: 10px; /* Espacement entre l'étiquette et le champ de saisie */
+    width: 100px;
+    text-align: left;
+    margin-right: 10px;
 }
 
 .alignLabel input {
-    width: 200px; /* Largeur fixe pour les champs de saisie */
-    padding: 8px; /* Remplissage pour le champ de saisie */
-    border: none; /* Suppression de la bordure par défaut */
-    border-radius: 4px; /* Ajout d'un rayon de bordure */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ajout d'une ombre */
+    width: 200px;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
-
-
 
 .logo {
     width: 20%;
@@ -151,8 +143,7 @@ input {
     width: 100%;
 
 }
-p,
-a {
+p, a {
     margin: 0;
 }
 
@@ -175,15 +166,14 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 .alignFriendship{
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-bottom: 10px;
-
 }
+
 .gameButton {
     background: transparent;
     border: none;
@@ -191,13 +181,12 @@ form {
     position: relative;
     width: 200px;
     height: 60px;
-    margin: 30px 0; /* Spacing between buttons */
+    margin: 30px 0;
 }
-
 .gameName {
-    display: none; /* Cacher le nom du jeu par défaut */
+    display: none;
     position: absolute;
-    top: 100%; /* Positionner le nom du jeu en dessous du bouton */
+    top: 100%;
     left: 50%;
     transform: translateX(-50%);
     background-color: #777777;
@@ -207,23 +196,20 @@ form {
 }
 
 .gameButton:hover .gameName {
-    display: block; /* Afficher le nom du jeu au survol */
+    display: block;
 }
 
 .jeux {
     display: flex;
-    flex-direction: column; /* Align children vertically */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: absolute; /* Position the container absolutely */
-    top: 70%; /* Adjust this value to match the poker table's position */
-    left: 50%; /* Adjust this value to match the poker table's position */
-    transform: translate(-50%, -50%); /* Center the container */
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     margin-top: 0;
-    height: auto; /* Height is set to auto to contain the buttons */
+    height: auto;
 }
-
-
 
 
 .error {
@@ -282,7 +268,17 @@ form {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Couleur d'arrière-plan semi-transparente */
-    backdrop-filter: blur(5px); /* Applique un flou */
-    z-index: 999; /* Assurez-vous que l'overlay est au-dessus de tout le reste */
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+}
+
+#create-game-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#gameInfo {
+    margin-top: 20px;
+    font-size: 16px;
 }

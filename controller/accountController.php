@@ -19,7 +19,7 @@ $confirm_password = filter_input(INPUT_POST, 'confirm_password', FILTER_SANITIZE
 require_once "../model/UserModel.php";
 
 // Appel du modèle pour récupérer le hash du mot de passe actuel
-$current_password_hash = UserModel::getPasswordHash($_SESSION['id']);
+$current_password_hash = Utils::getPasswordHash($_SESSION['id']);
 
 // Vérification si l'ancien mot de passe est correct
 if (password_verify($old_password, $current_password_hash)) {

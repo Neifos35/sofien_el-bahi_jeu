@@ -91,4 +91,14 @@ class UserModel {
         $stmt = $connexion->prepare($sql);
         return $stmt->execute([$nom, $prenom, $username, $password, $id]);
     }
+
+    public static function getId($username)
+    {
+        require_once "../src/lib/Connexion.php";
+        $connexion = Connexion::connect();
+        $sql = "SELECT id FROM user WHERE username = ?";
+        $stmt = $connexion->prepare($sql);
+        $stmt->execute([$username]);
+        return $stmt->fetch();
+    }
 }
