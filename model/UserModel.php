@@ -92,13 +92,12 @@ class UserModel {
         return $stmt->execute([$nom, $prenom, $username, $password, $id]);
     }
 
-    public static function getId($username)
-    {
-        require_once "../src/lib/Connexion.php";
+    public static function getId($username) {
         $connexion = Connexion::connect();
         $sql = "SELECT id FROM user WHERE username = ?";
         $stmt = $connexion->prepare($sql);
         $stmt->execute([$username]);
-        return $stmt->fetch();
+        $result = $stmt->fetch();
+        return $result ? $result['id'] : false; // Assurez-vous de retourner l'ID ou false
     }
 }

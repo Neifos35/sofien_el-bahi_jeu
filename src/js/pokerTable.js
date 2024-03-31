@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let formData = new FormData();
         formData.append('action', 'create');
 
-        fetch('../controller/PokerController.php', { // Ajustez cette URL à votre endpoint correct
+        fetch('../controller/PokerController.php', {
             method: 'POST',
             credentials: 'same-origin',
             body: formData,
@@ -21,40 +21,42 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Si la partie a été créée avec succès, redirigez vers la page de la partie
                     window.location.href = 'Texas.php?game_id=' + data.gameId;
 
-                } else {
-                    // Gérer les erreurs ici, si nécessaire
-                    console.log(data.message); // Affichage de l'erreur dans la console à titre d'exemple
                 }
             })
             .catch(error => console.error('Erreur:', error));
     });
 });
 
-function joinGame(gameId) {
+/************* Rejoindre table Texas hold'em *******************/
+
+function joinGame() {
+    const gameId = document.getElementById('gameIdInput').value;
+    if (!gameId) {
+        alert("Veuillez entrer un ID de table.");
+        return;
+    }
+
     let formData = new FormData();
-    formData.append('action', 'join');
     formData.append('game_id', gameId);
 
-    fetch('../controller/PokerController.php', { // Ajustez cette URL à votre endpoint correct
+    fetch('../controller/JoinGameController.php', {
         method: 'POST',
-        credentials: 'same-origin',
         body: formData,
     })
-        .then(response => {
-            const contentType = response.headers.get('content-type');
-            if (!contentType || !contentType.includes('application/json')) {
-                throw new TypeError("Oops, nous n'avons pas du JSON!");
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
+            console.log(data); // Afficher les données JSON converties
             if (data.success) {
-                // Si le joueur a rejoint la partie avec succès, redirigez vers la page de la partie
-                window.location.href = 'Texas.php?game_id=' + gameId;
+                console.log(data.gameId); // Vérifier la valeur de 'gameId'
+                window.location.href = `Texas.php?game_id=${data.gameId}`;
             } else {
-                // Gérer les erreurs ici, si nécessaire
-                console.log(data.message); // Affichage de l'erreur dans la console à titre d'exemple
+                alert(data.message);
             }
         })
-        .catch(error => console.error('Erreur:', error));
+        .catch(error => {
+            console.error('Erreur:', error);
+            alert("Erreur lors de la tentative de rejoindre la table.");
+        });
+
+
 }

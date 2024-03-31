@@ -45,18 +45,19 @@ class PokerModel
     public static function joinGame($gameId, $player2Username) {
         $connexion = Connexion::connect();
 
-
         $player2Id = UserModel::getId($player2Username);
-
         if (!$player2Id) {
-            return false; // L'utilisateur n'existe pas
+            return false;
         }
+
 
         $sql = "UPDATE games SET player2_id = ?, state = 'started' WHERE id = ? AND player2_id IS NULL";
         $stmt = $connexion->prepare($sql);
-        $success = $stmt->execute([$player2Id, $gameId]);
-
-        return $success;
+        if ($stmt->execute([$player2Id, $gameId])) {
+            return true; // Succès
+        } else {
+            return false; // Échec
+        }
     }
 
 

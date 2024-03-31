@@ -7,29 +7,6 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-
-// Affichage des erreurs
-$errors = [];
-if (isset($_GET['error'])) {
-    switch ($_GET['error']) {
-        case 'invalid_password':
-            $errors[] = "L'ancien mot de passe est incorrect.";
-            break;
-        case 'weak_password':
-            $errors[] = "Le nouveau mot de passe n'est pas assez robuste.";
-            break;
-        case 'password_mismatch':
-            $errors[] = "La confirmation du nouveau mot de passe ne correspond pas.";
-            break;
-        case 'update_error':
-            $errors[] = "Une erreur s'est produite lors de la mise à jour du compte.";
-            break;
-        default:
-            $errors[] = "Une erreur inconnue s'est produite.";
-            break;
-    }
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -116,6 +93,15 @@ if (isset($_GET['error'])) {
                     - Carré : quatre cartes de même valeur<br>
                     - Quinte flush : une suite de cinq cartes de la même couleur<br>
                     - Quinte flush royale : une suite de 10 à l'as de la même couleur</p>
+                <div id="create-game-container">
+                    <button class="submitButton" id="createGameBtn">Créer une Nouvelle Table</button>
+                    <div id="gameInfo"></div>
+                </div>
+
+                <div id="join-game-container">
+                    <button class="submitButton" id="joinGameBtn">Rejoindre une Table</button>
+                    <div id="joinGameInfo"></div>
+                </div>
             </div>
 
 
