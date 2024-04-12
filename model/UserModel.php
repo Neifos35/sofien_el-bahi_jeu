@@ -94,10 +94,10 @@ class UserModel {
 
     public static function getId($username) {
         $connexion = Connexion::connect();
-        $sql = "SELECT id FROM user WHERE username = ?";
-        $stmt = $connexion->prepare($sql);
+        $stmt = $connexion->prepare("SELECT id FROM user WHERE username = ?");
         $stmt->execute([$username]);
         $result = $stmt->fetch();
-        return $result ? $result['id'] : false; // Assurez-vous de retourner l'ID ou false
+        return $result ? ['id' => $result['id']] : null;
     }
+
 }

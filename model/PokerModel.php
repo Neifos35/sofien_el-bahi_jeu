@@ -59,6 +59,17 @@ class PokerModel
             return false; // Échec
         }
     }
+public static function getPlayers($gameId)
+{
+    $connexion = Connexion::connect();
 
+    $sql = "SELECT player1_id, player2_id FROM games WHERE id = ?";
+    $stmt = $connexion->prepare($sql);
+    $stmt->execute([$gameId]);
+
+    $players = $stmt->fetch();
+
+    return $players;
+}
 
 }

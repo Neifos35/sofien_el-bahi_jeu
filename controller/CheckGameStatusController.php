@@ -14,7 +14,7 @@ $gameId = $_GET['game_id'];
 $gameStatus = PokerModel::checkGameStatus($gameId);
 
 
-if ($gameStatus && $gameStatus['state'] == 'waiting' && $gameStatus['player2_id'] != null) {
+if ($gameStatus && $gameStatus['state'] == 'started' && $gameStatus['player2_id'] != null) {
     echo json_encode(['success' => true, 'gameStarted' => true]);
 } else {
     echo json_encode(['success' => true, 'gameStarted' => false]);

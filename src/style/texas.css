@@ -40,7 +40,7 @@ h1 {
     border-radius: 15px;
 }
 
-#dealer-hand, #player-hand {
+#opponent-hand, #player-hand {
     font-size: 18px;
     margin-bottom: 10px;
 }
@@ -74,21 +74,19 @@ h1 {
     color: red;
     border: solid 1px white;
 }
-#dealer-hand, #player-hand {
+#opponent-hand, #player-hand {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .btnAction {
-    display: none;
+
     position: absolute;
     bottom: 0;
 }
-#actionButtons{
-    display : none;
-}
-#hit-btn, #stand-btn, #reset-btn{
+
+#check, #fold, #reset-btn{
     padding: 50px;
     border-radius: 10px;
     border: solid transparent;
@@ -97,27 +95,26 @@ h1 {
     font-weight: 400;
     font-size: large;
 }
-#hit-btn{
+#check{
     background: rgb(122,0,0);
     background: linear-gradient(0deg, rgba(122,0,0,1) 0%, rgba(255,0,0,1) 15%, rgba(234,45,45,1) 31%, rgba(255,59,59,1) 44%, rgba(247,54,54,1) 56%, rgba(255,0,0,1) 83%, rgba(204,0,0,1) 100%);
     color: white;
 }
-#hit-btn:hover{
+#check:hover{
     background: linear-gradient(0deg, rgba(122,0,0,1) 0%, rgba(255,0,0,1) 50%,  rgba(122,0,0,1) 100%);
     border-color: white; /* Change border color on hover */
 }
-#stand-btn{
+#fold{
     background: rgb(0, 0, 0);
     background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(69, 69, 69, 1) 15%, rgba(118, 118, 118, 1) 46%, rgba(64, 64, 64, 1) 71%, rgba(6, 6, 6, 1) 100%);
     color: white;
 }
-#stand-btn:hover{
+#fold:hover{
     background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(64, 64, 64, 1) 50%,   rgba(6, 6, 6, 1) 100%);
-    border-color: white; /* Change border color on hover */
+    border-color: white;
 }
-
 #status {
-    position: fixed; /* ou `absolute` selon le contexte */
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -129,7 +126,6 @@ h1 {
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
-    color: #FFF;
     text-shadow: 0px 0px 3px #000;
 }
 
