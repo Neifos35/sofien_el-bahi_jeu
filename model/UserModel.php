@@ -92,6 +92,14 @@ class UserModel {
         return $stmt->execute([$nom, $prenom, $username, $password, $id]);
     }
 
+    public static function getIdPoker($username) {
+        $connexion = Connexion::connect();
+        $sql = "SELECT id FROM user WHERE username = ?";
+        $stmt = $connexion->prepare($sql);
+        $stmt->execute([$username]);
+        $result = $stmt->fetch();
+        return $result ? $result['id'] : false; // Assurez-vous de retourner l'ID ou false
+    }
     public static function getId($username) {
         $connexion = Connexion::connect();
         $stmt = $connexion->prepare("SELECT id FROM user WHERE username = ?");
@@ -99,5 +107,4 @@ class UserModel {
         $result = $stmt->fetch();
         return $result ? ['id' => $result['id']] : null;
     }
-
 }

@@ -26,8 +26,43 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Erreur:', error));
     });
 });
+function fetchAndHandle(url, formData) {
+    fetch(url, {
+        method: 'POST',
+        body: formData,
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not OK: ' + response.statusText);
+            }
+            return response.text(); // first read it as text
+        })
+        .then(text => {
+            try {
+                const data = JSON.parse(text); // try to parse it as json
+                return data;
+            } catch (error) {
+                throw new Error('Failed to parse JSON: ' + text); // throw if json parsing fails
+            }
+        })
+        .then(data => {
+            if (data.success) {
+                window.location.href = `Texas.php?game_id=${data.gameId}`;
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Error during operation: " + error.message);
+        });
+}
 
-/************* Rejoindre table Texas hold'em *******************/
+document.getElementById('createGameBtn').addEventListener('click', function() {
+    let formData = new FormData();
+    formData.append('action', 'create');
+    fetchAndHandle('../controller/PokerController.php', formData);
+});
 
 function joinGame() {
     const gameId = document.getElementById('gameIdInput').value;
@@ -35,28 +70,8 @@ function joinGame() {
         alert("Veuillez entrer un ID de table.");
         return;
     }
-
     let formData = new FormData();
     formData.append('game_id', gameId);
-
-    fetch('../controller/JoinGameController.php', {
-        method: 'POST',
-        body: formData,
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data); // Afficher les données JSON converties
-            if (data.success) {
-                console.log(data.gameId); // Vérifier la valeur de 'gameId'
-                window.location.href = `Texas.php?game_id=${data.gameId}`;
-            } else {
-                alert(data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Erreur:', error);
-            alert("Erreur lors de la tentative de rejoindre la table.");
-        });
-
-
+    fetchAndHandle('../controller/JoinGameController.php', formData);
+    return false; // prevent default form submission if used in form
 }

@@ -45,7 +45,7 @@ class PokerModel
     public static function joinGame($gameId, $player2Username) {
         $connexion = Connexion::connect();
 
-        $player2Id = UserModel::getId($player2Username);
+        $player2Id = UserModel::getIdPoker($player2Username);
         if (!$player2Id) {
             return false;
         }

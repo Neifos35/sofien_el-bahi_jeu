@@ -27,8 +27,11 @@ $gameId = $_GET['game_id'];
         <div class="TableDecoration">
             <span id="dealer-score-value"></span>
             <div id="opponent-hand">
-                <div id="cards"></div>
+                <div class="card BackgroundRed"></div>
+                <div class="card BackgroundRed"></div>
+                <div id="opponent-name">Nom de l'Adversaire</div>
             </div>
+            <div id="community-cards"></div>
             <div id="player-hand">
                 <div id="cards"></div>
             </div>
@@ -37,11 +40,6 @@ $gameId = $_GET['game_id'];
             <div id="pot"></div>
         </div>
     </div>
-</div>
-<div id="opponent-hand">
-    <div class="card back"></div>
-    <div class="card back"></div>
-    <div id="opponent-name">Nom de l'Adversaire</div>
 </div>
 
 <div class="btnAction" id="actionButtons">

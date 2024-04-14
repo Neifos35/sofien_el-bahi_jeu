@@ -3,7 +3,7 @@
 use Ratchet\Http\HttpServer;
 use Ratchet\Server\IoServer;
 use Ratchet\WebSocket\WsServer;
-use src\MyApp\Chat;
+
 
 require dirname(__DIR__) . '/sofien_el-bahi_jeu/vendor/autoload.php';
 

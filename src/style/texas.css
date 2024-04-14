@@ -40,11 +40,6 @@ h1 {
     border-radius: 15px;
 }
 
-#opponent-hand, #player-hand {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
 .cards {
     display: flex;
 }
@@ -75,9 +70,14 @@ h1 {
     border: solid 1px white;
 }
 #opponent-hand, #player-hand {
+    font-size: 18px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+#player-hand{
+    margin-top: 10px;
 }
 
 .btnAction {
@@ -149,3 +149,4 @@ h1 {
     animation: spinner .6s linear infinite;
 }
 
+.opponent-hand

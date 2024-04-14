@@ -1,34 +1,35 @@
 <?php
 
+header('Content-Type: application/json');
+session_start();
+
+require_once "../model/PokerModel.php";
+require_once "../model/UserModel.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    header('Content-Type: application/json'); // S'assurer que le type de contenu est défini
-
-    session_start();
-    require_once "../model/PokerModel.php";
-    require_once "../model/UserModel.php";
-
-    if (isset($_SESSION['username'])) {
-        $creatorUsername = $_SESSION['username'];
-
-        try {
-            $gameId = UserModel::getId($creatorUsername);
-            $gameId = PokerModel::createGame($gameId['id']);
-
-            if ($gameId) {
-                echo json_encode(['success' => true, 'gameId' => $gameId]);
-            } else {
-                // Vous pourriez vouloir fournir plus de détails sur l'échec ici
-                echo json_encode(['success' => false, 'message' => 'Erreur lors de la création de la partie.']);
-            }
-        }
-        catch (Exception $e) {
-                error_log($e->getMessage());
-                echo json_encode(['success' => false, 'message' => 'Erreur serveur.', 'error' => $e->getMessage()]);
-            }
-
-
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Vous devez être connecté pour créer une partie.']);
+    if (!isset($_SESSION['username'])) {
+        echo json_encode(['success' => false, 'message' => 'Authentication required.']);
+        exit;
     }
+
+    $creatorUsername = $_SESSION['username'];
+    try {
+        $userId = UserModel::getId($creatorUsername);
+
+        if (!$userId) {
+            throw new Exception("User ID retrieval failed.");
+        }
+
+        $gameId = PokerModel::createGame($userId['id']);
+        if ($gameId) {
+            echo json_encode(['success' => true, 'gameId' => $gameId]);
+        } else {
+            throw new Exception("Failed to create game.");
+        }
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        echo json_encode(['success' => false, 'message' => 'Server error occurred.', 'error' => $e->getMessage()]);
+    }
+} else {
+    echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
 }

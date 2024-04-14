@@ -30,3 +30,4 @@ if ($joined) {
 } else {
     echo json_encode(['success' => false, 'message' => 'Erreur lors de la tentative de rejoindre la partie.']);
 }
+

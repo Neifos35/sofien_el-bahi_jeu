@@ -1,4 +1,3 @@
-
 // Récupère l'ID du jeu à partir de l'URL
 const gameId = new URLSearchParams(window.location.search).get('game_id');
 
@@ -16,19 +15,27 @@ conn.onopen = () => {
 };
 
 conn.onmessage = (event) => {
-    const message = JSON.parse(event.data);
+    try {
 
-    switch (message.action) {
-        case 'deal':
-            displayPlayerCards(message.hand);
-            break;
-
-        case 'gameState':
-            updateUI(message.state);
-            break;
-
+        const message = JSON.parse(event.data);
+        switch (message.action) {
+            case 'deal':
+                displayPlayerCards(message.hand);
+                break;
+            case 'gameState':
+                updateUI(message.state);
+                break;
+            case 'showdown':
+                handleShowdown(message.result);
+                break;
+            default:
+                console.log('Unhandled message:', message);
+        }
+    } catch (err) {
+        console.error('Failed to process message:', event.data, err);
     }
 };
+
 
 // Gère les erreurs WebSocket
 conn.onerror = (error) => {
@@ -46,18 +53,18 @@ function sendAction(action, amount = 0) {
 
 // Met à jour l'interface utilisateur en fonction de l'état du jeu
 function updateUI(state) {
-    // Exemple de mise à jour de l'interface : le pot actuel
     document.getElementById('pot').textContent = `Pot actuel : ${state.pot}`;
+    updateCommunityCards(state.communityCards);
 
-    // Active ou désactive les boutons d'action en fonction du tour du joueur
-    const actionButtons = document.getElementById('actionButtons');
-    if (state.playerTurn === myPlayerId) {
-        actionButtons.style.display = 'block';
-    } else {
-        actionButtons.style.display = 'none';
-    }
+    // Assuming 'myPlayerId' is correctly assigned the ID of the player in this session
+    const isMyTurn = state.currentPlayer === myPlayerId;
 
+    // Enable or disable buttons based on whether it's the player's turn
+    toggleActionButton(isMyTurn);
 }
+
+
+/******************* Fonctions d'affichage des cartes *******************/
 function getRank(card) {
     return card.slice(0, -1);
 }
@@ -99,6 +106,13 @@ function getSuitHTML(card) {
             return '';
     }
 }
+
+function toggleActionButton(enable) {
+    const buttons = document.querySelectorAll('#actionButtons button');
+    buttons.forEach(button => button.disabled = !enable);
+}
+
+// Affiche les cartes du joueur
 function displayPlayerCards(cards) {
     if (!Array.isArray(cards)) {
         console.error("Invalid cards data:", cards);
@@ -106,4 +120,51 @@ function displayPlayerCards(cards) {
     }
     const cardsHtml = cards.map(card => createCardElement(card).outerHTML).join('');
     document.getElementById('player-hand').innerHTML = cardsHtml;
+}
+
+function updateCommunityCards(cards) {
+    const communityCardsContainer = document.getElementById('community-cards');
+    communityCardsContainer.innerHTML = cards.map(card => createCardElement(card).outerHTML).join('');
+}
+function playerAction(action) {
+    switch (action) {
+        case 'check':
+            sendAction('check');
+            break;
+        case 'fold':
+            sendAction('fold');
+            break;
+        case 'raise':
+            let raiseAmount = getRaiseAmount();
+            if (raiseAmount) {
+                sendAction('raise', raiseAmount);
+            } else {
+                console.error('Raise amount must be provided.');
+            }
+            break;
+        default:
+            console.error('Unknown action:', action);
+    }
+}
+
+function getRaiseAmount() {
+    const amount = parseFloat(document.getElementById('raiseAmountInput').value);
+    return isNaN(amount) ? null : amount;
+}
+function updatePlayerActions(playerId, action, amount) {
+    const actionsContainer = document.getElementById('actions');
+    actionsContainer.textContent += `Player ${playerId} ${action} ${amount}\n`;
+}
+
+/************** Fin de la partie **************/
+function handleShowdown(result) {
+    // Display all hands and highlight the winner
+    result.players.forEach(player => {
+        const playerDiv = document.createElement('div');
+        playerDiv.innerHTML = `<strong>Player ${player.id}</strong>: ` + player.hand.map(card => createCardElement(card).outerHTML).join('');
+        if (player.id === result.winner) {
+            playerDiv.classList.add('winner');
+        }
+        document.getElementById('results').appendChild(playerDiv);
+    });
 }
